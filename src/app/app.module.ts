@@ -1,14 +1,16 @@
 import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { CoreModule } from "./core/core.module";
+import { SideNavComponent } from "./side-nav/side-nav.component";
 import { MaterialModule } from "./material/material.module";
+import { HeaderComponent } from "./header/header.component";
+import { AppRoutingModule } from "./app-routing.module";
+import { SharedModule } from "./shared/shared.module";
+import { CoreModule } from "./core/core.module";
+import { AppComponent } from "./app.component";
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [CoreModule, MaterialModule, AppRoutingModule],
-  providers: [],
+  declarations: [AppComponent, SideNavComponent, HeaderComponent],
+  imports: [CoreModule, SharedModule, MaterialModule, AppRoutingModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
