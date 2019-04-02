@@ -1,3 +1,5 @@
+import { DomSanitizer } from "@angular/platform-browser";
+import { MatIconRegistry } from "@angular/material";
 import { Component } from "@angular/core";
 
 @Component({
@@ -5,4 +7,11 @@ import { Component } from "@angular/core";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+    this.matIconRegistry.addSvgIcon(
+      "google-logo",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/img/google-logo.svg")
+    );
+  }
+}

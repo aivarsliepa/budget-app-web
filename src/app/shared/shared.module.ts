@@ -1,11 +1,13 @@
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
 
-const modules = [CommonModule, FormsModule];
+import { MaterialModule } from "../material/material.module";
+
+const modules = [CommonModule, FormsModule, MaterialModule, FlexLayoutModule];
 
 @NgModule({
-  declarations: [],
   imports: modules,
   exports: modules
 })

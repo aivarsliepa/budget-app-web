@@ -1,0 +1,22 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+  <div fxLayout="column" style="min-width: 300px">
+    <mat-form-field>
+      <input matInput placeholder="E-mail" [(ngModel)]="email" type="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" [(ngModel)]="password" type="password">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Confirm Password" [(ngModel)]="confirmPassword" type="password">
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" (click)="register()">
+      Register with email
+    </button>
+    <br>
+    <button mat-raised-button (click)="googleLogin()">
+      <mat-icon svgIcon="google-logo" style="margin-right: 10px"></mat-icon>
+      <span>Sign in with Google</span>
+    </button>
+  </div>
+</div>

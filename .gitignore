@@ -44,3 +44,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+!.gitkeep
+
+# exluded env variables
+/src/environments/excludes/**
+
+# firebase project specific
+.firebaserc

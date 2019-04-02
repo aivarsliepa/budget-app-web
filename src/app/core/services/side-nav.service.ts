@@ -1,4 +1,4 @@
-import { ReplaySubject, Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { first } from "rxjs/operators";
 
@@ -6,11 +6,7 @@ import { first } from "rxjs/operators";
   providedIn: "root"
 })
 export class SideNavService {
-  private showSideNav$ = new ReplaySubject<boolean>();
-
-  constructor() {
-    this.showSideNav$.next(false);
-  }
+  private showSideNav$ = new BehaviorSubject(false);
 
   getShowSideNav(): Observable<boolean> {
     return this.showSideNav$.asObservable();
