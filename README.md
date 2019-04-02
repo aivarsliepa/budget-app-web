@@ -3,7 +3,7 @@
 ## Setup
 
 1. setup firebase project
-2. copy firebase web config keys export them from `src/environments/excludes/firebaseConfig.ts` and `src/environments/excludes/firebaseConfig.prod.ts`
+2. copy firebase web config keys and export them from `src/environments/excludes/firebaseConfig.ts` and `src/environments/excludes/firebaseConfig.prod.ts`
 
 ```typescript
 // example firebaseConfig.ts, correct config can be found in firebase console

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
 import { MatSidenav } from "@angular/material";
 import { SideNavService } from "../core/services/side-nav.service";
 import { Subscription } from "rxjs";
+import { AuthService } from "../core/services/auth.service";
+import { UserService } from "../core/services/user.service";
 
 @Component({
   selector: "app-side-nav",
@@ -9,29 +11,50 @@ import { Subscription } from "rxjs";
   styleUrls: ["./side-nav.component.scss"]
 })
 export class SideNavComponent implements OnInit, OnDestroy {
-  @ViewChild("sidenav") sidenav: MatSidenav;
+  @ViewChild("sidenav") sideNav: MatSidenav | null = null;
 
-  private sideNavServiceSub: Subscription;
-  private sideNavSub: Subscription;
+  private sideNavServiceSub: Subscription | null = null;
+  private sideNavSub: Subscription | null = null;
 
-  constructor(private sideNavService: SideNavService) {}
+  constructor(
+    private sideNavService: SideNavService,
+    private authService: AuthService,
+    public userService: UserService
+  ) {}
 
   ngOnInit() {
     this.sideNavServiceSub = this.sideNavService.getShowSideNav().subscribe(showNav => {
-      if (showNav && !this.sidenav.opened) {
-        this.sidenav.open();
-      } else if (!showNav && this.sidenav.opened) {
-        this.sidenav.close();
+      if (!this.sideNav) {
+        return;
+      }
+
+      if (showNav && !this.sideNav.opened) {
+        this.sideNav.open();
+      } else if (!showNav && this.sideNav.opened) {
+        this.sideNav.close();
       }
     });
 
-    this.sideNavSub = this.sidenav.openedChange.subscribe(val =>
+    if (!this.sideNav) {
+      return;
+    }
+
+    this.sideNavSub = this.sideNav.openedChange.subscribe((val: boolean) =>
       this.sideNavService.setShowSideNav(val)
     );
   }
 
   ngOnDestroy() {
-    this.sideNavServiceSub.unsubscribe();
-    this.sideNavSub.unsubscribe();
+    if (this.sideNavServiceSub) {
+      this.sideNavServiceSub.unsubscribe();
+    }
+
+    if (this.sideNavSub) {
+      this.sideNavSub.unsubscribe();
+    }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

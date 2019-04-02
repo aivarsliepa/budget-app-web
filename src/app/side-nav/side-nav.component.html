@@ -1,12 +1,26 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav style="min-width: 200px">
     <mat-nav-list>
-      <button mat-button routerLink="/login" (click)="sidenav.close()" style="width: 100%">
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
-          <mat-icon>exit_to_app</mat-icon>
-          <span>Login</span>
-        </div>
-      </button>
+      <div *ngIf="userService.getUser() | async; else loggedOut">
+        <button mat-button (click)="logout()" style="width: 100%">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </div>
+        </button>
+      </div>
+
+
+      <ng-template #loggedOut>
+        <button mat-button routerLink="/login" (click)="sidenav.close()" style="width: 100%">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Login</span>
+          </div>
+        </button>
+      </ng-template>
+
+
     </mat-nav-list>
   </mat-sidenav>
 
