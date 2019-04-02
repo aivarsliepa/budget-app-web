@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
 import { MatSidenav } from "@angular/material";
-import { SideNavService } from "../core/services/side-nav.service";
 import { Subscription } from "rxjs";
+
+import { SideNavService } from "../core/services/side-nav.service";
 import { AuthService } from "../core/services/auth.service";
 import { UserService } from "../core/services/user.service";
 
