@@ -1,5 +1,6 @@
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
@@ -7,7 +8,21 @@ import "firebase/auth";
   providedIn: "root"
 })
 export class AuthService {
-  constructor(public afAuth: AngularFireAuth) {}
+  private authState = {
+    initial: true
+  };
+
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
+    this.afAuth.authState.subscribe(user => {
+      if (this.authState.initial) {
+        this.authState.initial = false;
+        return;
+      }
+
+      const route = user ? "/home" : "/login";
+      this.router.navigate([route]);
+    });
+  }
 
   loginWithEmailAndPassword(email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password).catch(console.warn);

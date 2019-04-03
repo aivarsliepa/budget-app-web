@@ -1,5 +1,5 @@
 import { AngularFireAuth } from "@angular/fire/auth";
-import { Observable, BehaviorSubject } from "rxjs";
+import { Observable, ReplaySubject } from "rxjs";
 import { Injectable } from "@angular/core";
 
 type User = firebase.User | null;
@@ -8,7 +8,7 @@ type User = firebase.User | null;
   providedIn: "root"
 })
 export class UserService {
-  private user$ = new BehaviorSubject<User>(null);
+  private user$ = new ReplaySubject<User>(1);
 
   constructor(public afAuth: AngularFireAuth) {
     this.afAuth.user.subscribe(this.user$);
