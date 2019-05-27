@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
 import { MatSidenav } from "@angular/material";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 
 import { SideNavService } from "../core/services/side-nav.service";
 import { UserService, User } from "../core/services/user.service";
@@ -16,9 +16,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   private sideNavServiceSub: Subscription | null = null;
   private sideNavSub: Subscription | null = null;
-  private userSub: Subscription | null = null;
 
-  public user: User = null;
+  public user: Observable<User> | null = null;
 
   constructor(
     private sideNavService: SideNavService,
@@ -27,8 +26,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.userSub = this.userService.getUser().subscribe(user => (this.user = user));
+    this.user = this.userService.getUser();
 
+    // update UI when state changes
     this.sideNavServiceSub = this.sideNavService.getShowSideNav().subscribe(showNav => {
       if (!this.sideNav) {
         return;
@@ -45,6 +45,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
       return;
     }
 
+    // update state when UI changes
     this.sideNavSub = this.sideNav.openedChange.subscribe((val: boolean) =>
       this.sideNavService.setShowSideNav(val)
     );
@@ -57,10 +58,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
     if (this.sideNavSub) {
       this.sideNavSub.unsubscribe();
-    }
-
-    if (this.userSub) {
-      this.userSub.unsubscribe();
     }
   }
 

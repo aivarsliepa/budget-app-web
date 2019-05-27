@@ -13,6 +13,7 @@ export class SideNavService {
   }
 
   setShowSideNav(showSideNav: boolean): void {
+    // push new value only if value has changed
     this.showSideNav$.pipe(first()).subscribe(previousValue => {
       if (showSideNav !== previousValue) {
         this.showSideNav$.next(showSideNav);
