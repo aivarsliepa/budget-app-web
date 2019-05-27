@@ -1,11 +1,11 @@
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
 
 import { MaterialModule } from "../material/material.module";
 
-const modules = [CommonModule, FormsModule, MaterialModule, FlexLayoutModule];
+const modules = [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, FlexLayoutModule];
 
 @NgModule({
   imports: modules,

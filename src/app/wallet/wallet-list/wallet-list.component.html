@@ -1,0 +1,8 @@
+<div style="margin: 20px">
+  <app-wallet-list-item *ngFor="let wallet of walletService.wallets | async" [wallet]="wallet">
+  </app-wallet-list-item>
+</div>
+
+<button mat-fab class="fab" (click)="addWallet()">
+  <mat-icon aria-label="Add new wallet" svgIcon="add"></mat-icon>
+</button>

@@ -2,6 +2,8 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material";
 import { Component } from "@angular/core";
 
+const icons = ["google-logo", "enter", "exit", "wallet", "menu", "add"];
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -9,9 +11,15 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+    icons.forEach(icon => {
+      this.registerIcon(icon);
+    });
+  }
+
+  private registerIcon(iconName: string) {
     this.matIconRegistry.addSvgIcon(
-      "google-logo",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("assets/img/google-logo.svg")
+      iconName,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`assets/img/${iconName}.svg`)
     );
   }
 }

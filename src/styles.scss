@@ -9,3 +9,11 @@ html {
   margin: 0;
   box-sizing: border-box;
 }
+
+.mat-fab {
+  &.fab {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+  }
+}

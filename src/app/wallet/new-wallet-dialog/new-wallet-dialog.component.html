@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Create new wallet</h1>
+<form (submit)="submit()">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Name" [formControl]="name" required autocomplete="off">
+    </mat-form-field>
+  </div>
+  <!-- button for submit on enter -->
+  <button style="display: none;"></button>
+</form>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button (click)="submit()" type="submit">Submit</button>
+</div>

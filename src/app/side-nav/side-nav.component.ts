@@ -3,8 +3,8 @@ import { MatSidenav } from "@angular/material";
 import { Subscription } from "rxjs";
 
 import { SideNavService } from "../core/services/side-nav.service";
+import { UserService, User } from "../core/services/user.service";
 import { AuthService } from "../core/services/auth.service";
-import { UserService } from "../core/services/user.service";
 
 @Component({
   selector: "app-side-nav",
@@ -16,14 +16,19 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   private sideNavServiceSub: Subscription | null = null;
   private sideNavSub: Subscription | null = null;
+  private userSub: Subscription | null = null;
+
+  public user: User = null;
 
   constructor(
     private sideNavService: SideNavService,
     private authService: AuthService,
-    public userService: UserService
+    private userService: UserService
   ) {}
 
   ngOnInit() {
+    this.userSub = this.userService.getUser().subscribe(user => (this.user = user));
+
     this.sideNavServiceSub = this.sideNavService.getShowSideNav().subscribe(showNav => {
       if (!this.sideNav) {
         return;
@@ -52,6 +57,10 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
     if (this.sideNavSub) {
       this.sideNavSub.unsubscribe();
+    }
+
+    if (this.userSub) {
+      this.userSub.unsubscribe();
     }
   }
 
