@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: "wallets",
-    loadChildren: "./wallet/wallet.module#WalletModule",
+    loadChildren: "./wallets/wallets.module#WalletsModule",
     canActivate: [LoggedInGuard]
   },
   {
