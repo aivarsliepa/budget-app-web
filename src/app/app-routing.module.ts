@@ -11,6 +11,12 @@ const routes: Routes = [
     canActivate: [LoggedInGuard]
   },
   {
+    path: "wallets/:walletId",
+    loadChildren: "./wallet/wallet.module#WalletModule",
+    canActivate: [LoggedInGuard],
+    pathMatch: "full"
+  },
+  {
     path: "wallets",
     loadChildren: "./wallets/wallets.module#WalletsModule",
     canActivate: [LoggedInGuard]

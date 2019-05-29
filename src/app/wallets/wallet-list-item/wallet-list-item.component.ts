@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from "@angular/router";
 import { Component, Input } from "@angular/core";
 
 import { Wallet } from "src/app/core/models/Wallet";
@@ -9,4 +10,12 @@ import { Wallet } from "src/app/core/models/Wallet";
 })
 export class WalletListItemComponent {
   @Input() wallet: Wallet | null = null;
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  selectWallet() {
+    if (this.wallet) {
+      this.router.navigate([this.wallet.id], { relativeTo: this.route });
+    }
+  }
 }
