@@ -1,6 +1,6 @@
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from "@angular/fire/firestore";
-import { ReplaySubject, BehaviorSubject } from "rxjs";
-import { map, switchMap } from "rxjs/operators";
+import { ReplaySubject, BehaviorSubject, Observable, Subject } from "rxjs";
+import { map, switchMap, flatMap, takeUntil } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 
 import { Wallet, WalletData } from "../models/Wallet";
@@ -16,20 +16,26 @@ const actionToWallet = (action: DocumentChangeAction<WalletData>): Wallet => ({
 })
 export class WalletService {
   public wallets = new ReplaySubject<Wallet[]>(1);
+  private notifier = new Subject();
 
   constructor(private db: AngularFirestore, private userService: UserService) {
     this.userService
       .getUser()
       .pipe(
         switchMap(user => {
+          this.notifier.next(true);
+
           if (!user) {
-            return new BehaviorSubject([]);
+            return new BehaviorSubject([]).pipe(takeUntil(this.notifier));
           }
 
           return this.db
             .collection<WalletData>(this.walletCollectionPath(user.uid))
             .snapshotChanges()
-            .pipe(map(actions => actions.map(actionToWallet)));
+            .pipe(
+              map(actions => actions.map(actionToWallet)),
+              takeUntil(this.notifier)
+            );
         })
       )
       .subscribe(this.wallets);
@@ -37,6 +43,14 @@ export class WalletService {
 
   createWallet(wallet: WalletData): Promise<DocumentReference> {
     return this.db.collection<WalletData>(this.walletCollectionPath()).add(wallet);
+  }
+
+  getWallet(id: string | null | undefined): Observable<Wallet> {
+    return this.wallets.pipe(
+      flatMap(wallets => {
+        return wallets.filter(wallet => wallet.id === id);
+      })
+    );
   }
 
   private walletCollectionPath(userId = this.userService.getUserId()) {
