@@ -14,8 +14,8 @@ export class WalletListComponent {
 
   addWallet() {
     this.dialog.open(NewWalletDialogComponent, {
-      maxWidth: "600px",
-      minWidth: "300px"
+      maxWidth: "40rem",
+      minWidth: "20rem"
     });
   }
 }
