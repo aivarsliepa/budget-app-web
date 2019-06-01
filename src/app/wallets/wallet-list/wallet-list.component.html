@@ -1,8 +1,11 @@
 <div style="margin: 1rem">
-  <app-wallet-list-item *ngFor="let wallet of walletService.wallets | async" [wallet]="wallet">
-  </app-wallet-list-item>
+  <div *ngIf="wallets?.length > 0; else noWallets">
+    <app-wallet-list-item *ngFor="let wallet of wallets" [wallet]="wallet">
+    </app-wallet-list-item>
+  </div>
+  <ng-template #noWallets>
+    <div>
+      Create a wallet to start tracking your expenses.
+    </div>
+  </ng-template>
 </div>
-
-<button mat-fab class="fab" (click)="addWallet()">
-  <mat-icon aria-label="Add new wallet" svgIcon="add"></mat-icon>
-</button>

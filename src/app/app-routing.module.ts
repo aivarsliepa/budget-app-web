@@ -11,14 +11,13 @@ const routes: Routes = [
     canActivate: [LoggedInGuard]
   },
   {
-    path: "wallets/:walletId",
-    loadChildren: "./wallet/wallet.module#WalletModule",
-    canActivate: [LoggedInGuard],
-    pathMatch: "full"
-  },
-  {
     path: "wallets",
     loadChildren: "./wallets/wallets.module#WalletsModule",
+    canActivate: [LoggedInGuard]
+  },
+  {
+    path: "wallet",
+    loadChildren: "./wallet/wallet.module#WalletModule",
     canActivate: [LoggedInGuard]
   },
   {
@@ -33,8 +32,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "/home",
-    pathMatch: "full"
+    redirectTo: "/home"
   }
 ];
 

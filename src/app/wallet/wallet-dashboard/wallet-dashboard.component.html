@@ -1,4 +1,4 @@
-<p *ngIf="(wallet$ | async) as wallet">
+<div *ngIf="(walletService.getSelectedWallet() | async) as wallet">
   {{ wallet.name }}
   {{ wallet.id }}
-</p>
+</div>

@@ -12,12 +12,12 @@ import { AuthService } from "../core/services/auth.service";
   styleUrls: ["./side-nav.component.scss"]
 })
 export class SideNavComponent implements OnInit, OnDestroy {
-  @ViewChild("sidenav") sideNav: MatSidenav | null = null;
+  @ViewChild("sidenav") sideNav?: MatSidenav;
 
-  private sideNavServiceSub: Subscription | null = null;
-  private sideNavSub: Subscription | null = null;
+  private sideNavServiceSub?: Subscription;
+  private sideNavSub?: Subscription;
 
-  public user: Observable<User> | null = null;
+  public user$?: Observable<User>;
 
   constructor(
     private sideNavService: SideNavService,
@@ -26,7 +26,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.user = this.userService.getUser();
+    this.user$ = this.userService.getUser();
 
     // update UI when state changes
     this.sideNavServiceSub = this.sideNavService.getShowSideNav().subscribe(showNav => {

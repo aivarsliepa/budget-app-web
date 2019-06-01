@@ -10,6 +10,7 @@ users: [{
       categoryId: String
       description: String
       labels: [String]
+      type: String ("expense" | "income")
     }]
   }]
   categories: [{
@@ -20,5 +21,6 @@ users: [{
   settings: {
     useOfflineSync: Boolean
   }
+  selectedWallet: String (walletId)
 }]
 ```

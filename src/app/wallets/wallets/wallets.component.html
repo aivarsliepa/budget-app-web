@@ -1,0 +1,5 @@
+<app-wallet-list [wallets]="wallets$ | async"></app-wallet-list>
+
+<button mat-fab class="fab" (click)="addWallet()">
+  <mat-icon aria-label="Add new wallet" svgIcon="add"></mat-icon>
+</button>

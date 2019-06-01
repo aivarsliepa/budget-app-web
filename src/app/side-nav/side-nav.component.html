@@ -1,7 +1,7 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav style="min-width: 12rem">
     <mat-nav-list>
-      <div *ngIf="user | async; else loggedOut">
+      <div *ngIf="user$ | async; else loggedOut">
         <button mat-button routerLink="/wallets" (click)="sidenav.close()" style="width: 100%">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2rem">
             <mat-icon svgIcon="wallet"></mat-icon>
