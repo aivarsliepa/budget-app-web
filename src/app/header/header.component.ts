@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 import { SideNavService } from "../core/services/side-nav.service";
 
@@ -10,7 +10,7 @@ import { SideNavService } from "../core/services/side-nav.service";
 export class HeaderComponent {
   constructor(private sideNavService: SideNavService) {}
 
-  public openMenu() {
+  openMenu() {
     this.sideNavService.setShowSideNav(true);
   }
 }
