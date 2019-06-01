@@ -1,6 +1,6 @@
-import { AngularFirestore } from "@angular/fire/firestore";
-import { map, takeUntil } from "rxjs/operators";
+import { AngularFirestore, DocumentReference } from "@angular/fire/firestore";
 import { ReplaySubject, Subject, Observable } from "rxjs";
+import { map, takeUntil } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 
 import { documentChangeActionToData } from "../utils/firestore-utils";
@@ -24,7 +24,7 @@ export class WalletEntryService {
       }
 
       this.db
-        .collection<WalletEntryData>(this.walletEntryCollectionPath(wallet.id))
+        .collection<WalletEntryData>(this.walletEntryCollectionPath())
         .snapshotChanges()
         .pipe(
           map(actions => actions.map(documentChangeActionToData)),
@@ -34,11 +34,11 @@ export class WalletEntryService {
     });
   }
 
-  private walletEntryCollectionPath(selectedWalletId = this.walletService.selectedWalletId) {
-    return `${this.walletService.walletCollectionPath()}/${selectedWalletId}/entries`;
+  private walletEntryCollectionPath(): string {
+    return this.walletService.getSelectedWalletDocPath() + "/entries";
   }
 
-  createEntry(walletEntry: WalletEntryData) {
+  createEntry(walletEntry: WalletEntryData): Promise<DocumentReference> {
     return this.db.collection<WalletEntryData>(this.walletEntryCollectionPath()).add(walletEntry);
   }
 

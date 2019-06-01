@@ -1,4 +1,4 @@
-import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { Observable, ReplaySubject, Subject } from "rxjs";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { map, takeUntil } from "rxjs/operators";
@@ -37,15 +37,19 @@ export class UserService {
     });
   }
 
-  private getUserDocument() {
-    return this.db.doc<UserData>(`users/${this.userId}`);
+  private getUserDocument(): AngularFirestoreDocument<UserData> {
+    return this.db.doc<UserData>(this.getUserDocPath());
   }
 
-  update(userData: Partial<UserData>) {
+  update(userData: Partial<UserData>): Promise<void> {
     return this.getUserDocument().set(userData, { merge: true });
   }
 
   getUser(): Observable<User> {
     return this.user$.asObservable();
+  }
+
+  getUserDocPath(): string {
+    return `users/${this.userId}`;
   }
 }

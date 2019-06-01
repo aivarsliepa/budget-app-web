@@ -1,4 +1,4 @@
-type EntryType = "expense" | "income";
+type EntryType = "expense";
 
 export interface WalletEntryData {
   value: number;

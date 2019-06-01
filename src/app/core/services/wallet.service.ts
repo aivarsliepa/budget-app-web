@@ -28,7 +28,7 @@ export class WalletService {
       }
 
       this.db
-        .collection<WalletData>(this.walletCollectionPath(user.uid))
+        .collection<WalletData>(this.walletCollectionPath())
         .snapshotChanges()
         .pipe(
           map(actions => actions.map(documentChangeActionToData)),
@@ -51,16 +51,20 @@ export class WalletService {
     });
   }
 
-  walletCollectionPath(userId = this.userService.userId) {
-    return `users/${userId}/wallets`;
+  walletCollectionPath(): string {
+    return this.userService.getUserDocPath() + "/wallets";
+  }
+
+  getSelectedWalletDocPath(): string {
+    return this.walletCollectionPath() + "/" + this.selectedWalletId;
   }
 
   createWallet(wallet: WalletData): Promise<DocumentReference> {
     return this.db.collection<WalletData>(this.walletCollectionPath()).add(wallet);
   }
 
-  selectWallet(selectedWallet: string) {
-    this.userService.update({ selectedWallet });
+  selectWallet(selectedWallet: string): Promise<void> {
+    return this.userService.update({ selectedWallet });
   }
 
   getWallets(): Observable<Wallet[]> {

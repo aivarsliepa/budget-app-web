@@ -1,7 +1,14 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav style="min-width: 12rem">
     <mat-nav-list>
+
       <div *ngIf="user$ | async; else loggedOut">
+        <button mat-button routerLink="/categories" (click)="sidenav.close()" style="width: 100%">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2rem">
+            <mat-icon svgIcon="categories"></mat-icon>
+            <span>Categories</span>
+          </div>
+        </button>
         <button mat-button routerLink="/wallets" (click)="sidenav.close()" style="width: 100%">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2rem">
             <mat-icon svgIcon="wallet"></mat-icon>
@@ -16,7 +23,6 @@
         </button>
       </div>
 
-
       <ng-template #loggedOut>
         <button mat-button routerLink="/login" (click)="sidenav.close()" style="width: 100%">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2rem">
@@ -25,7 +31,6 @@
           </div>
         </button>
       </ng-template>
-
 
     </mat-nav-list>
   </mat-sidenav>

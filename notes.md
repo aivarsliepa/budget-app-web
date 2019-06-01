@@ -1,5 +1,7 @@
 ### firestore schema
 
+Currently only expenses
+
 ```
 users: [{
   wallets: [{
@@ -10,12 +12,12 @@ users: [{
       categoryId: String
       description?: String
       labels: [String]
-      type: String ("expense" | "income")
+      type: "expense"
     }]
   }]
   categories: [{
     name: String
-    type: String ("expense" | "income")
+    type: "expense"
     parentId: String
   }]
   settings: {

@@ -24,19 +24,19 @@ export class AuthService {
     });
   }
 
-  loginWithEmailAndPassword(email: string, password: string) {
+  loginWithEmailAndPassword(email: string, password: string): void {
     this.afAuth.auth.signInWithEmailAndPassword(email, password).catch(console.warn);
   }
 
-  register(email: string, password: string) {
+  register(email: string, password: string): void {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password).catch(console.warn);
   }
 
-  logout() {
+  logout(): void {
     this.afAuth.auth.signOut();
   }
 
-  googleSignIn() {
+  googleSignIn(): void {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(console.warn);
   }
 }

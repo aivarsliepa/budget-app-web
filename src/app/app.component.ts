@@ -2,7 +2,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material";
 import { Component } from "@angular/core";
 
-const icons = ["google-logo", "enter", "exit", "wallet", "menu", "add"];
+const icons = ["google-logo", "enter", "exit", "wallet", "menu", "add", "categories"];
 
 @Component({
   selector: "app-root",

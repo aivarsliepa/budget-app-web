@@ -1,7 +1,9 @@
 import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 
-const routes: Routes = [];
+import { CategoriesViewComponent } from "./categories-view/categories-view.component";
+
+const routes: Routes = [{ path: "", component: CategoriesViewComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
