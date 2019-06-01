@@ -1,4 +1,4 @@
-<div style="margin: 1rem">
+<div>
   <div *ngIf="wallets?.length > 0; else noWallets">
     <app-wallet-list-item *ngFor="let wallet of wallets" [wallet]="wallet">
     </app-wallet-list-item>

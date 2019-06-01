@@ -1,4 +1,15 @@
-<div *ngIf="(walletService.getSelectedWallet() | async) as wallet">
-  {{ wallet.name }}
-  {{ wallet.id }}
+<div *ngIf="(wallet$ | async) as wallet">
+  <mat-card>
+    <mat-card-title>{{ wallet.name }}</mat-card-title>
+    <div>Icome: 0</div>
+    <div>Expenses: 0</div>
+    <div>Balance: 0</div>
+  </mat-card>
+
+  <app-wallet-entry-list [walletEntries]="walletEntries$ | async"></app-wallet-entry-list>
+
 </div>
+
+<button mat-fab class="fab" (click)="addEntry()">
+  <mat-icon aria-label="Add new wallet entry" svgIcon="add"></mat-icon>
+</button>

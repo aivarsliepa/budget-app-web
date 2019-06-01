@@ -1,15 +1,11 @@
-import { AngularFirestore, DocumentChangeAction, DocumentReference } from "@angular/fire/firestore";
+import { AngularFirestore, DocumentReference } from "@angular/fire/firestore";
 import { ReplaySubject, Subject, Observable } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 
+import { documentChangeActionToData } from "../utils/firestore-utils";
 import { Wallet, WalletData } from "../models/Wallet";
 import { UserService } from "./user.service";
-
-const actionToWallet = (action: DocumentChangeAction<WalletData>): Wallet => ({
-  id: action.payload.doc.id,
-  ...action.payload.doc.data()
-});
 
 @Injectable({
   providedIn: "root"
@@ -18,6 +14,8 @@ export class WalletService {
   private selectedWallet$ = new ReplaySubject<Wallet | undefined>(1);
   private wallets$ = new ReplaySubject<Wallet[]>(1);
   private notifier = new Subject<void>();
+
+  selectedWalletId?: string;
 
   constructor(private db: AngularFirestore, private userService: UserService) {
     this.userService.getUser().subscribe(user => {
@@ -33,7 +31,7 @@ export class WalletService {
         .collection<WalletData>(this.walletCollectionPath(user.uid))
         .snapshotChanges()
         .pipe(
-          map(actions => actions.map(actionToWallet)),
+          map(actions => actions.map(documentChangeActionToData)),
           takeUntil(this.notifier)
         )
         .subscribe(wallets => this.wallets$.next(wallets));
@@ -43,11 +41,17 @@ export class WalletService {
           map(wallets => wallets.find(wallet => wallet.id === user.selectedWallet)),
           takeUntil(this.notifier)
         )
-        .subscribe(wallet => this.selectedWallet$.next(wallet));
+        .subscribe(wallet => {
+          if (wallet) {
+            this.selectedWalletId = wallet.id;
+          }
+
+          this.selectedWallet$.next(wallet);
+        });
     });
   }
 
-  private walletCollectionPath(userId = this.userService.getUserId()) {
+  walletCollectionPath(userId = this.userService.userId) {
     return `users/${userId}/wallets`;
   }
 

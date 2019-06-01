@@ -14,7 +14,8 @@ export type User = (firebase.User & UserData) | null;
 export class UserService {
   private user$ = new ReplaySubject<User>(1);
   private notifier = new Subject<void>();
-  private userId?: string;
+
+  userId?: string;
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
     this.afAuth.user.subscribe(firebaseUser => {
@@ -46,9 +47,5 @@ export class UserService {
 
   getUser(): Observable<User> {
     return this.user$.asObservable();
-  }
-
-  getUserId(): string | undefined {
-    return this.userId;
   }
 }

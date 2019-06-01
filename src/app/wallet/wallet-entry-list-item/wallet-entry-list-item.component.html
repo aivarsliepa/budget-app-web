@@ -1,0 +1,8 @@
+<mat-card *ngIf="walletEntry" fxLayout="row" fxLayoutAlign="space-between">
+  <div fxLayout="row" fxLayoutGap="1rem">
+    <div>Icon</div>
+    <div>{{walletEntry?.id}}</div>
+  </div>
+
+  <div>{{getSign() + walletEntry?.value}}</div>
+</mat-card>
