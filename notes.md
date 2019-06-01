@@ -8,7 +8,7 @@ users: [{
       value: Number
       date: Datetime
       categoryId: String
-      description: String
+      description?: String
       labels: [String]
       type: String ("expense" | "income")
     }]
