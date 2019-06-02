@@ -1,8 +1,6 @@
-type CategoryType = "expense";
-
 export interface CategoryData {
   name: string;
-  type: CategoryType;
+  type: "expense";
   parentId?: string;
 }
 

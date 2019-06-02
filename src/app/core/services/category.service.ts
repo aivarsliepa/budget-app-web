@@ -4,7 +4,7 @@ import { map, takeUntil } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 
 import { documentChangeActionToData } from "../utils/firestore-utils";
-import { Category, CategoryData } from "../models/Category";
+import { Category, CategoryData } from "src/app/core/models/Category";
 import { UserService } from "./user.service";
 
 @Injectable({
