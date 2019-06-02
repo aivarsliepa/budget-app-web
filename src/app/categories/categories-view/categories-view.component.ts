@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 
 import { CategoryService } from "src/app/core/services/category.service";
-import { Category } from "src/app/core/models/Category";
+import { CategoryGroup } from "src/app/core/models/Category";
 
 @Component({
   selector: "app-categories-view",
@@ -10,12 +10,12 @@ import { Category } from "src/app/core/models/Category";
   styleUrls: ["./categories-view.component.scss"]
 })
 export class CategoriesViewComponent implements OnInit {
-  categories$?: Observable<Category[]>;
+  categoryGroups$?: Observable<CategoryGroup[]>;
 
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit() {
-    this.categories$ = this.categoryService.getCategories();
+    this.categoryGroups$ = this.categoryService.getCategoryGroups();
   }
 
   addCategory() {

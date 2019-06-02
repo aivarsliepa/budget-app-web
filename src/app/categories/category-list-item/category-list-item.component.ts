@@ -9,4 +9,5 @@ import { Category } from "src/app/core/models/Category";
 })
 export class CategoryListItemComponent {
   @Input() category?: Category;
+  @Input() showDivider?: boolean;
 }

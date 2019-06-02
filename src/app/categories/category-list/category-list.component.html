@@ -1,1 +1,4 @@
-<app-category-list-item *ngFor="let category of categories" [category]="category"></app-category-list-item>
+<mat-list *ngIf="categories?.length > 0" role="list">
+  <app-category-list-item *ngFor="let category of categories; last as last" [category]="category" [showDivider]="!last">
+  </app-category-list-item>
+</mat-list>

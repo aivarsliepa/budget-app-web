@@ -1,0 +1,6 @@
+<div *ngIf="categoryGroup" [style.margin-top]="categoryGroup?.name ? '1rem' : '0'">
+  <div>{{categoryGroup?.name}}</div>
+  <mat-card>
+    <app-category-list [categories]="categoryGroup?.categories"></app-category-list>
+  </mat-card>
+</div>

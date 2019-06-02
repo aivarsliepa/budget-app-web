@@ -1,3 +1,2 @@
-<p>
-  category-list-item works!
-</p>
+<mat-list-item *ngIf="category" role="listitem">{{ category?.name }}</mat-list-item>
+<mat-divider *ngIf="showDivider" [inset]="true"></mat-divider>

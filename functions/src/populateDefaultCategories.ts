@@ -6,6 +6,11 @@ interface CategoryData {
   parentId?: string;
 }
 
+interface WithParentId {
+  parentId: string;
+  [s: string]: string;
+}
+
 const defaultRootExpeneses: string[] = [
   "Food",
   "Transportation",
@@ -32,11 +37,9 @@ const transportationExpenses: CategoryData[] = defaultTransportationExpenses.map
 );
 const homeExpenses: CategoryData[] = defaultHomeExpenses.map(mapNameToCategoryData);
 
-function addParentRef<T extends { parentId?: string }>(
-  ref: admin.firestore.DocumentReference
-): (data: T) => T {
-  return function(data: T) {
-    return { ...data, parent: ref.id };
+function addParentRef<T>(ref: admin.firestore.DocumentReference) {
+  return function(data: T): WithParentId {
+    return { ...data, parentId: ref.id };
   };
 }
 

@@ -10,3 +10,8 @@ export interface CategoryData {
 export interface Category extends CategoryData {
   id: string;
 }
+
+export interface CategoryGroup {
+  name: string;
+  categories: Category[];
+}

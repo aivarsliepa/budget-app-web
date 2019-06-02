@@ -2,6 +2,7 @@ import { MatButtonModule, MatCheckboxModule, MatToolbarModule } from "@angular/m
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatDividerModule } from "@angular/material/divider";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
@@ -14,6 +15,7 @@ const materialModules = [
   MatSnackBarModule,
   MatCheckboxModule,
   MatToolbarModule,
+  MatDividerModule,
   MatSidenavModule,
   MatButtonModule,
   MatDialogModule,
