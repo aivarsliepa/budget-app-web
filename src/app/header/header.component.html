@@ -1,7 +1,8 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" #header>
   <mat-toolbar-row>
     <button mat-icon-button (click)="openMenu()">
       <mat-icon aria-label="Menu button" svgIcon="menu"></mat-icon>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
+<div [style.height]="header._elementRef.nativeElement.clientHeight + 'px'"></div>
