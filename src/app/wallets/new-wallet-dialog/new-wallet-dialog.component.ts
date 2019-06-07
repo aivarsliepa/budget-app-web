@@ -11,10 +11,10 @@ import { Router } from "@angular/router";
   styleUrls: ["./new-wallet-dialog.component.scss"]
 })
 export class NewWalletDialogComponent {
-  public name = new FormControl("", [Validators.required]);
+  name = new FormControl("", [Validators.required]);
 
   constructor(
-    public dialogRef: MatDialogRef<NewWalletDialogComponent>,
+    private dialogRef: MatDialogRef<NewWalletDialogComponent>,
     private walletService: WalletService,
     private snackBar: MatSnackBar,
     private router: Router

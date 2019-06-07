@@ -4,6 +4,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
@@ -17,6 +18,7 @@ const materialModules = [
   MatToolbarModule,
   MatDividerModule,
   MatSidenavModule,
+  MatSelectModule,
   MatButtonModule,
   MatDialogModule,
   MatInputModule,

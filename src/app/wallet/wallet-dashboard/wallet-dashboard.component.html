@@ -1,9 +1,7 @@
 <div *ngIf="(wallet$ | async) as wallet">
-  <mat-card>
+  <mat-card class="mb-1">
     <mat-card-title>{{ wallet.name }}</mat-card-title>
-    <div>Icome: 0</div>
-    <div>Expenses: 0</div>
-    <div>Balance: 0</div>
+    <div>Total: 0</div>
   </mat-card>
 
   <app-wallet-entry-list [walletEntries]="walletEntries$ | async"></app-wallet-entry-list>

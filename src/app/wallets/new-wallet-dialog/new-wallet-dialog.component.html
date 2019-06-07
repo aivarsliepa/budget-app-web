@@ -10,5 +10,5 @@
 </form>
 <div mat-dialog-actions>
   <button mat-button (click)="close()">Cancel</button>
-  <button mat-button (click)="submit()" type="submit">Submit</button>
+  <button mat-button (click)="submit()" type="submit" [disabled]="!name.valid">Submit</button>
 </div>

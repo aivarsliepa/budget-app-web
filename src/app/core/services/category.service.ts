@@ -1,9 +1,9 @@
-import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFirestore, DocumentReference } from "@angular/fire/firestore";
 import { ReplaySubject, Subject, Observable } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 
-import { Category, CategoryData, CategoryGroup } from "src/app/core/models/Category";
+import { CategoryData, CategoryGroup } from "src/app/core/models/Category";
 import { documentChangeActionToData } from "../utils/firestore-utils";
 import { StringToStringMap } from "../models/general";
 import { UserService } from "./user.service";
@@ -149,9 +149,9 @@ export class CategoryService {
     return this.userService.getUserDocPath() + "/categories";
   }
 
-  // getCategories(): Observable<Category[]> {
-  //   return this.categories$.asObservable();
-  // }
+  createCategory(category: CategoryData): Promise<DocumentReference> {
+    return this.db.collection<CategoryData>(this.getCategoriesCollectionPath()).add(category);
+  }
 
   getCategoryGroups(): Observable<CategoryGroup[]> {
     return this.categorieGroups$.asObservable();
