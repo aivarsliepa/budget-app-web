@@ -9,12 +9,4 @@ import { WalletEntry } from "src/app/core/models/WalletEntry";
 })
 export class WalletEntryListItemComponent {
   @Input() walletEntry?: WalletEntry;
-
-  getSign(): string {
-    if (this.walletEntry && this.walletEntry.type === "expense") {
-      return "-";
-    }
-
-    return "";
-  }
 }

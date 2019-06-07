@@ -9,9 +9,10 @@ export interface WalletEntryData {
   type: EntryType;
 }
 
-/**
- * Data + firestore id
- */
-export interface WalletEntry extends WalletEntryData {
-  id: string;
+export interface WalletEntryWithId extends WalletEntryData {
+  id: string; // firestore ID
+}
+
+export interface WalletEntry extends WalletEntryWithId {
+  name: string; // category name or "Other" if without
 }
