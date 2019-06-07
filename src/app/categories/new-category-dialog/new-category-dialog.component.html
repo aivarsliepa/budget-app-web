@@ -14,7 +14,7 @@
 
   <mat-form-field>
     <mat-label>Parent category</mat-label>
-    <mat-select [formControl]="parentName" (selectionChange)="onParentCategorySelect($event)">
+    <mat-select (selectionChange)="onParentCategorySelect($event)">
       <mat-option>-- None --</mat-option>
       <mat-optgroup *ngFor="let group of categoryGroups$ | async" [label]="group.name || 'Root'">
         <mat-option *ngFor="let category of group.categories" [value]="category">

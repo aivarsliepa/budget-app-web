@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Create new entry</h1>
+<div mat-dialog-content>
+  <form (submit)="submit()" [formGroup]="form">
+    <mat-form-field>
+      <input matInput placeholder="Value" type="number" formControlName="value" required autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select (selectionChange)="onCategorySelect($event)">
+        <mat-option>-- None --</mat-option>
+        <mat-optgroup *ngFor="let group of categoryGroups$ | async" [label]="group.name || 'Root'">
+          <mat-option *ngFor="let category of group.categories" [value]="category">
+            {{category.name}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="hidden" placeholder="Date" formControlName="date">
+      <input matInput [matDatepicker]="datepicker" placeholder="Date" [value]="today"
+        (dateChange)="onDateSelect($event)" disabled>
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input matInput placeholder="Description" formControlName="description" autocomplete="off">
+    </mat-form-field>
+    <input type="hidden" formControlName="categoryId">
+
+    <!-- button for submit on enter -->
+    <button style="display: none;"></button>
+  </form>
+
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button (click)="submit()" type="submit" [disabled]="!form.valid">Submit</button>
+</div>

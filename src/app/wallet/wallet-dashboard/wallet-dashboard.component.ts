@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material";
 import { Observable } from "rxjs";
 
+import { NewWalletEntryDialogComponent } from "../new-wallet-entry-dialog/new-wallet-entry-dialog.component";
 import { WalletEntryService } from "src/app/core/services/wallet-entry.service";
 import { WalletService } from "src/app/core/services/wallet.service";
 import { WalletEntry } from "src/app/core/models/WalletEntry";
@@ -17,7 +19,8 @@ export class WalletDashboardComponent implements OnInit {
 
   constructor(
     private walletService: WalletService,
-    private walletEntryService: WalletEntryService
+    private walletEntryService: WalletEntryService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -26,12 +29,9 @@ export class WalletDashboardComponent implements OnInit {
   }
 
   addEntry() {
-    this.walletEntryService.createEntry({
-      categoryId: "t",
-      date: new Date(),
-      labels: [],
-      type: "expense",
-      value: 1
+    this.dialog.open(NewWalletEntryDialogComponent, {
+      maxWidth: "40rem",
+      minWidth: "20rem"
     });
   }
 }

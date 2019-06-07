@@ -17,8 +17,6 @@ export class NewCategoryDialogComponent implements OnInit {
     parentId: new FormControl("")
   });
 
-  parentName = new FormControl("");
-
   categoryGroups$?: Observable<CategoryGroup[]>;
 
   constructor(
