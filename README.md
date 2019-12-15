@@ -1,5 +1,5 @@
 # Budget App
-
+WIP
 ## Setup
 
 1. setup firebase project
